@@ -26,9 +26,9 @@ while not check:  # While loop to continue, if check isn't updated (No valid que
 
 try:
     search = dns.resolver.resolve(domainName, queryType)
+    print("Domain: " + f"{domainName}")
+    print("Query Type: " + f"{queryType}")
     for rdata in search:
-        print("Domain: " + f"{domainName}")
-        print("Query Type: " + f"{queryType}")
         print(f"{rdata}")
 
 except Exception as e:
