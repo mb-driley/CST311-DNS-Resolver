@@ -1,4 +1,6 @@
 import sys
+import dns.resolver
+from dns import rdata
 
 # Variables
 check = False  # Boolean variable
