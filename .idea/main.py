@@ -5,6 +5,7 @@ from dns import rdata
 # Variables
 check = False  # Boolean variable
 validQueryTypes = "ANSMX"  # String variable
+file = open("mydnsresolver_output.txt", 'w')  # Creates a file
 
 domainName = input("Enter a domain: ")  # Prompts the user to enter a domain
 while not check:  # While loop to continue, if check isn't updated (No valid query types are inputted)
@@ -32,9 +33,15 @@ while not check:  # While loop to continue, if check isn't updated (No valid que
 
 try:
     search = dns.resolver.resolve(domainName, queryType)  # Performs the dns.resolver search
+    file.write("Domain: " + f"{domainName}")  # Writes the domain name onto the file
+    file.write("\n")  # Writes an endline
     print("Domain: " + f"{domainName}")  # Prints the User Inputted Domain Name
+    file.write("Query Type: " + f"{queryType}")  # Writes the query type on the file
+    file.write("\n")  # Writes an endline
     print("Query Type: " + f"{queryType}")  # Prints the User Inputted Query Type
     for rdata in search:  # For each loop to assure all data is printed
+        file.write(f"{rdata}")  # Writes the data from the domain name and query
+        file.write("\n")  # Writes an endline
         print(f"{rdata}")  # Prints the data found from the dns.resolver search
 
 except Exception as NXDomain:  # Exception added if the domain isn't found/doesn't exist
@@ -43,4 +50,6 @@ except Exception as NXDomain:  # Exception added if the domain isn't found/doesn
 except Exception as e:  # Standard Error Exception
     print("An error has occurred: " + {e})
 
-sys.exit(0)
+file.write("\n")  # Writes an endline
+file.close()  # Closes the file
+sys.exit(0)  # Exits the program
